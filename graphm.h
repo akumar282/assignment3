@@ -24,7 +24,7 @@ class GraphM {
         void buildGraph(ifstream &);
         bool insertEdge(int start, int end, int dist);
         bool removeEdge(int start, int end);
-        int findShortestPath();
+        void findShortestPath();
         void displayAll() const; 
         void display(int n1, int n2) const;
 
