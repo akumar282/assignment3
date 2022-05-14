@@ -111,26 +111,22 @@ void GraphM::findShortestPath(){
 }
 
 void GraphM::display(int n1, int n2) const{
-    n1--;
-    n2--;
-    if(T[n1][n2].dist == INFT){
-        return;
+    cout<< n1 <<"   "<< n2;
+    if(C[n1][n2] < INFT){
+        cout << T[n1][n2].dist << endl;
+        displayPathHelp(n1, n2);
+        cout << endl;
     }
-    int track[size];
-    int count = 0;
-    int temp = T[n1][n2].path;
-    while(T[n1][n2].path != n1){
-        track[count] = temp; 
-        temp = T[n1][temp].path;
-        
-        count++;
+}
+
+void GraphM::displayPathHelp(int n1, int n2) const{
+    int othercol = T[n1][n2].path;
+    if(othercol != 0){
+        cout<< n2 << " ";
+        displayPathHelp(n1, othercol);
+    } else {
+        cout << n1 << endl;
     }
-    cout << n2;
-    cout << endl;
-    for(int i = 0; i<count; i++){
-        cout<< data[track[i]];
-    }
-    cout << endl; 
 }
 
 
