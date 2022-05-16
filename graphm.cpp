@@ -115,7 +115,7 @@ void GraphM::display(int n1, int n2) const{
     if(n1 < 0 || n1 > size || n2 < 0 || n2 > size) {
         return;
     }
-    cout << setw(7) << n1 << setw(7) << n2;
+    cout << setw(7) << n1+1 << setw(7) << n2+1;
     if(T[n1][n2].dist < INFT) {
         cout << setw(12) << T[n1][n2].dist;
     } else {
@@ -140,12 +140,18 @@ void GraphM::displayPathHelp(int n1, int n2) const{
 }
 
 void GraphM::displayNames(int n1, int n2) const{
+    if(n1 < 0 || n2 < 0){
+        return;
+    }
+    if(T[n1][n2].dist== INFT){
+        return;
+    }
     int otherPath = T[n1][n2].path;
     if(otherPath != n2) {
         displayNames(n1, otherPath);
-        cout << n2 << " ";
+        cout << n2+1 << " ";
     } else if (n1 == n2) {
-        cout << n2 << " ";
+        cout << n2+1 << " ";
     }
 }
 
@@ -157,8 +163,12 @@ void GraphM::displayAll() const{
         for(int j = 0; j < size; j++) {
             if(i != j) {
                 cout << setw(27) << i+1 << setw(10) << j+1;
-                if(T[i][j].dist < INFT) {
-                    cout << setw(12) << T[i][j].dist;
+                if(T[i][j].dist < INFT ) {
+                    if(T[i][j].path < 0){
+                        cout << setw(12) << "----";
+                    } else {
+                        cout << setw(12) << T[i][j].dist;
+                    }
                 } else {
                     cout << setw(12) << "----";
                 }
