@@ -1,9 +1,21 @@
+// --------------------- graphl.cpp -----------------------------------------
+// Abhimanyu Kumar CSS 343 B
+// 5/8/22 
+// 4/24/22 
+// --------------------------------------------------------------------------------------------------------------------
+// This program is the repesentation of dijistras algoritmn   
+// -------------------------------------------------------------------------------------------------------------------- 
+//
+// --------------------------------------------------------------------------------------------------------------------
+
 #include<iostream>
 #include<fstream>
 #include "graphl.h"
 #include <algorithm>
 #include <iomanip>
-
+// --------------------- GraphL() -----------------------------------------
+// Default constructor
+// --------------------------------------------------------------
 GraphL::GraphL(){
     size = 0;
     for(int i = 0; i < MAXNODES; i++) {
@@ -12,7 +24,9 @@ GraphL::GraphL(){
         nodeArr[i].visited = false;
     }
 }
-
+// --------------------- ~GraphL() -----------------------------------------
+// Destructor
+// --------------------------------------------------------------
 GraphL::~GraphL(){
     for(int i = 1; i <= size; i++) {
         nodeArr[i].visited = false;
@@ -29,7 +43,9 @@ GraphL::~GraphL(){
         }
     }
 }
-
+// --------------------- buildGraph() -----------------------------------------
+// Builds up graph node information and adjacency list of edges between each
+// --------------------------------------------------------------
 void GraphL::buildGraph(ifstream& inFile){
     try {
         int n1, n2;
@@ -60,7 +76,9 @@ void GraphL::buildGraph(ifstream& inFile){
         cerr << "File was not opened" << endl;
     }
 }
-
+// --------------------- depthFirstSearch() -----------------------------------------
+// Makes a depth-first search and displays each node in depth-first order
+// --------------------------------------------------------------
 void GraphL::depthFirstSearch(){
     cout << "Depth-first ordering: ";
     for(int i = 1; i <= size; i++) {
@@ -70,7 +88,9 @@ void GraphL::depthFirstSearch(){
     }
     cout << "\n" << endl;
 }
-
+// --------------------- depthFHelp() -----------------------------------------
+// Helper function for depthFirstSearch()
+// --------------------------------------------------------------
 void GraphL::depthFHelp(int n1){
     cout << "  " << n1;
     nodeArr[n1].visited = true;
@@ -82,7 +102,9 @@ void GraphL::depthFHelp(int n1){
         current = current -> nextEdge;
     }
 }
-
+// --------------------- displayGraph() -----------------------------------------
+// Displays each node information and edge in the graph
+// --------------------------------------------------------------
 void GraphL::displayGraph(){
     cout << "Graph: " << endl;
     for(int i = 1; i <= size; i++) {
