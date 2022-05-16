@@ -28,5 +28,6 @@ class GraphM {
         void displayAll() const; 
         void display(int n1, int n2) const;
         void displayPathHelp(int n1, int n2) const;
+        void displayNames(int n1, int n2) const;
 
 };

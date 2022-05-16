@@ -11,7 +11,7 @@
 #include<fstream>
 #include "graphm.h"
 #include <algorithm>
-
+#include <iomanip>
 
 GraphM::GraphM(){
     for(int i = 0; i<MAXNODES; i++){
@@ -111,25 +111,61 @@ void GraphM::findShortestPath(){
 }
 
 void GraphM::display(int n1, int n2) const{
-    cout<< n1 <<"   "<< n2;
-    if(C[n1][n2] < INFT){
-        cout << T[n1][n2].dist << endl;
-        displayPathHelp(n1, n2);
-        cout << endl;
+     if(n1 < 1 || n1 > size || n2 < 1 || n2 > size) {
+        return;
     }
+    cout << setw(7) << n1 << setw(7) << n2;
+    if(T[n1][n2].dist < INFT) {
+        cout << setw(12) << T[n1][n2].dist;
+    } else {
+        cout << setw(15) << "----";
+    }
+    cout << setw(15);
+    displayPathHelp(n1, n2);
+    cout << endl;
+    displayNames(n1, n2);
+    cout << endl;
 }
 
 void GraphM::displayPathHelp(int n1, int n2) const{
     int othercol = T[n1][n2].path;
     if(othercol != 0){
-        cout<< n2 << " ";
         displayPathHelp(n1, othercol);
-    } else {
-        cout << n1 << endl;
+        cout<< data[n2] << endl;
+    } else if (n2 == n1){
+        cout << data[n2] << endl;
+    }
+    cout << endl;
+}
+
+void GraphM::displayNames(int n1, int n2) const{
+    int otherPath = T[n1][n2].path;
+    if(otherPath != 0) {
+        displayNames(n1, otherPath);
+        cout << n2 << " ";
+    } else if (n1 == n2) {
+        cout << n2 << " ";
     }
 }
 
 
 void GraphM::displayAll() const{
-
+    cout << "Description" << setw(20) << "From node" << setw(10) << "To node" << setw(14) << "Dijkstra's" << setw(7) << "Path" << endl;
+    for(int i = 1; i <= size; i++) {
+        cout << data[i] << endl;
+        for(int j = 1; j <= size; j++) {
+            if(i != j) {
+                cout << setw(27) << i << setw(10) << j;
+                if(T[i][j].dist < INFT) {
+                    cout << setw(12) << T[i][j].dist;
+                } else {
+                    cout << setw(12) << "----";
+                }
+                cout << setw(10);
+                displayNames(i,j);
+                cout << endl;
+            }
+        }
+    }
+    cout << endl;
 }
