@@ -46,7 +46,6 @@ int main() {
 		cout << "File could not be opened." << endl;
 		return 1;
 	}
-	/*
 	//for each graph, find the depth-first search ordering
 	for (;;) {
 		GraphL G;
@@ -56,7 +55,6 @@ int main() {
 		G.displayGraph();
 		G.depthFirstSearch();    // find and display depth-first ordering to cout
 	}
-	*/
 	cout << endl;
 	return 0;
 }

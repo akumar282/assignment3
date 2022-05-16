@@ -32,7 +32,7 @@ GraphL::~GraphL(){
 
 void GraphL::buildGraph(ifstream& inFile){
     try {
-        int from, to;
+        int n1, n2;
         inFile >> size;
         if(size > 0) {
             string str;
@@ -41,18 +41,18 @@ void GraphL::buildGraph(ifstream& inFile){
                 nodeArr[i].data = new NodeData();
                 nodeArr[i].data -> setData(inFile);
             }
-            while(inFile >> from >> to) {
-                if(from == 0) {
+            while(inFile >> n1 >> n2) {
+                if(n1 == 0) {
                     break;
                 }
                 EdgeNode* node = new EdgeNode;
-                node -> adjGraphNode = to;
-                if(nodeArr[from].edgeHead == NULL) {
-                    nodeArr[from].edgeHead = node;
-                    nodeArr[from].edgeHead -> nextEdge = NULL;
+                node -> adjGraphNode = n2;
+                if(nodeArr[n1].edgeHead == NULL) {
+                    nodeArr[n1].edgeHead = node;
+                    nodeArr[n1].edgeHead -> nextEdge = NULL;
                 } else {
-                    node -> nextEdge = nodeArr[from].edgeHead;
-                    nodeArr[from].edgeHead = node;
+                    node -> nextEdge = nodeArr[n1].edgeHead;
+                    nodeArr[n1].edgeHead = node;
                 }
             }
         }
@@ -71,10 +71,10 @@ void GraphL::depthFirstSearch(){
     cout << "\n" << endl;
 }
 
-void GraphL::depthFHelp(int v){
-    cout << "  " << v;
-    nodeArr[v].visited = true;
-    EdgeNode* current = nodeArr[v].edgeHead;
+void GraphL::depthFHelp(int n1){
+    cout << "  " << n1;
+    nodeArr[n1].visited = true;
+    EdgeNode* current = nodeArr[n1].edgeHead;
     while(current != NULL) {
         if(!nodeArr[current -> adjGraphNode].visited) {
             depthFHelp(current -> adjGraphNode);
